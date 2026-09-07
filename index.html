@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <nav class="navbar">
             <div class="logo">Dorina's</div>
@@ -38,55 +37,23 @@
     <section id="products" class="products">
         <h2>Our Products</h2>
         <p class="section-intro">Find everyday essentials and quality goods at Dorina's.</p>
-
         <div class="product-container">
-            <div class="product-card">
-                <div class="product-icon">🍚</div>
-                <h3>Rice</h3>
-                <p>Quality rice for your everyday meals.</p>
-                <strong>₦25,000</strong>
-                <button onclick="addToCart('Rice', 25000)">Add to Cart</button>
-            </div>
+            <div class="product-card"><div class="product-icon">🍚</div><h3>Rice</h3><p>Quality rice for your everyday meals.</p><strong>₦25,000</strong><button onclick="addToCart('Rice', 25000)">Add to Cart</button></div>
+            <div class="product-card"><div class="product-icon">🍝</div><h3>Spaghetti</h3><p>Delicious pasta for the whole family.</p><strong>₦1,500</strong><button onclick="addToCart('Spaghetti', 1500)">Add to Cart</button></div>
+            <div class="product-card"><div class="product-icon">🍜</div><h3>Noodles</h3><p>Quick and tasty noodles for every home.</p><strong>₦1,200</strong><button onclick="addToCart('Noodles', 1200)">Add to Cart</button></div>
+            <div class="product-card"><div class="product-icon">🥤</div><h3>Drinks</h3><p>A variety of refreshing beverages.</p><strong>₦1,000</strong><button onclick="addToCart('Drinks', 1000)">Add to Cart</button></div>
+            <div class="product-card"><div class="product-icon">🧼</div><h3>Soap</h3><p>Quality soap and personal care essentials.</p><strong>₦1,500</strong><button onclick="addToCart('Soap', 1500)">Add to Cart</button></div>
+            <div class="product-card"><div class="product-icon">🧻</div><h3>Household Items</h3><p>Useful products for your everyday needs.</p><strong>₦2,000</strong><button onclick="addToCart('Household Items', 2000)">Add to Cart</button></div>
+        </div>
+    </section>
 
-            <div class="product-card">
-                <div class="product-icon">🍝</div>
-                <h3>Spaghetti</h3>
-                <p>Delicious pasta for the whole family.</p>
-                <strong>₦1,500</strong>
-                <button onclick="addToCart('Spaghetti', 1500)">Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <div class="product-icon">🍜</div>
-                <h3>Noodles</h3>
-                <p>Quick and tasty noodles for every home.</p>
-                <strong>₦1,200</strong>
-                <button onclick="addToCart('Noodles', 1200)">Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <div class="product-icon">🥤</div>
-                <h3>Drinks</h3>
-                <p>A variety of refreshing beverages.</p>
-                <strong>₦1,000</strong>
-                <button onclick="addToCart('Drinks', 1000)">Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <div class="product-icon">🧼</div>
-                <h3>Soap</h3>
-                <p>Quality soap and personal care essentials.</p>
-                <strong>₦1,500</strong>
-                <button onclick="addToCart('Soap', 1500)">Add to Cart</button>
-            </div>
-
-            <div class="product-card">
-                <div class="product-icon">🧻</div>
-                <h3>Household Items</h3>
-                <p>Useful products for your everyday needs.</p>
-                <strong>₦2,000</strong>
-                <button onclick="addToCart('Household Items', 2000)">Add to Cart</button>
-            </div>
+    <section id="cart" class="cart-section">
+        <h2>Your Shopping Cart</h2>
+        <div id="cart-items"><p>Your cart is empty.</p></div>
+        <div class="cart-summary">
+            <h3>Total: <span id="cart-total">₦0</span></h3>
+            <button class="order-button" onclick="orderOnWhatsApp()">Order on WhatsApp</button>
+            <button class="clear-button" onclick="clearCart()">Clear Cart</button>
         </div>
     </section>
 
@@ -94,13 +61,11 @@
         <h2>Contact Us</h2>
         <p>Ready to order? Contact Dorina's today.</p>
         <p>Call us on: <strong>08148157968</strong></p>
-        <button onclick="contactUs()">Order on WhatsApp</button>
+        <button onclick="contactUs()">Contact Us on WhatsApp</button>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Dorina's. All Rights Reserved.</p>
-    </footer>
-
+    <footer><p>&copy; 2026 Dorina's. All Rights Reserved.</p></footer>
     <script src="script.js"></script>
+    <script src="products.js"></script>
 </body>
 </html>
