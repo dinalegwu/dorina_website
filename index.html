@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dorina's - Your Trusted Provision Store</title>
+    <meta name="description" content="Dorina's Provisions & More - quality groceries, drinks, household items and personal care products.">
+    <title>Dorina's - Provisions & More</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,9 +24,9 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <p class="hero-tag">QUALITY • AFFORDABLE • CONVENIENT</p>
-            <h1>Welcome to Dorina's</h1>
-            <p>Your trusted store for quality provisions and everyday essentials.</p>
-            <button onclick="shopNow()">Shop Now</button>
+            <h1>Quality Goods, Everyday Essentials</h1>
+            <p>Fresh provisions, drinks, household items and more — all in one place.</p>
+            <button onclick="shopNow()">Shop Now →</button>
         </div>
     </section>
 
@@ -34,16 +35,49 @@
         <p>At Dorina's, we provide different varieties of quality goods and everyday provisions at affordable prices.</p>
     </section>
 
+    <!-- Product artwork used by the product cards -->
+    <svg class="product-artwork" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <linearGradient id="greenPack" x1="0" x2="1"><stop offset="0"/><stop offset="1" stop-color="#3f9b45"/></linearGradient>
+            <linearGradient id="redPack" x1="0" x2="1"><stop offset="0"/><stop offset="1" stop-color="#d71920"/></linearGradient>
+            <linearGradient id="bluePack" x1="0" x2="1"><stop offset="0"/><stop offset="1" stop-color="#1264a3"/></linearGradient>
+        </defs>
+        <symbol id="rice" viewBox="0 0 300 300"><path fill="#e9edf0" d="M75 35h150l18 220H57z"/><path fill="#e23a2e" d="M75 35h150l4 42H71z"/><path fill="#4e9b45" d="M70 112h160v105H70z"/><text x="150" y="63" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">GOLDEN PENNY</text><text x="150" y="150" text-anchor="middle" font-size="30" font-weight="800" fill="#fff">RICE</text><text x="150" y="185" text-anchor="middle" font-size="15" fill="#fff">10 KG</text></symbol>
+        <symbol id="spaghetti" viewBox="0 0 300 300"><path fill="#f0e8dc" d="M95 22h110l22 255H73z"/><path fill="#e31e2a" d="M95 22h110l5 50H90z"/><path fill="#2e9a46" d="M90 95h120v95H90z"/><text x="150" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">GOLDEN PENNY</text><text x="150" y="145" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">SPAGHETTI</text><text x="150" y="171" text-anchor="middle" font-size="14" fill="#fff">500g</text></symbol>
+        <symbol id="noodles" viewBox="0 0 300 300"><rect x="50" y="55" width="200" height="185" rx="18" fill="#ffd21c"/><rect x="58" y="65" width="184" height="34" rx="8" fill="#e51d2a"/><text x="150" y="89" text-anchor="middle" font-size="23" font-weight="800" fill="#fff">Indomie</text><text x="150" y="145" text-anchor="middle" font-size="29" font-weight="900" fill="#e31e2a">NOODLES</text><text x="150" y="176" text-anchor="middle" font-size="18" font-weight="700">Chicken Flavour</text></symbol>
+        <symbol id="oil" viewBox="0 0 300 300"><path fill="#e4b12d" d="M110 55h80v22h15v170H95V77h15z"/><rect x="125" y="30" width="50" height="30" rx="6" fill="#26813b"/><rect x="104" y="115" width="92" height="65" rx="8" fill="#f6d34b"/><text x="150" y="145" text-anchor="middle" font-size="22" font-weight="800" fill="#1f6f37">GRAND</text><text x="150" y="169" text-anchor="middle" font-size="13">VEGETABLE OIL</text></symbol>
+        <symbol id="coke" viewBox="0 0 300 300"><path fill="#222" d="M120 45h60l8 22h10v18l-10 10v150l-22 30h-32l-22-30V95l-10-10V67h10z"/><rect x="110" y="100" width="80" height="105" rx="12" fill="#e31d25"/><text x="150" y="155" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">Coca-Cola</text><text x="150" y="180" text-anchor="middle" font-size="14" fill="#fff">500ml</text></symbol>
+        <symbol id="pepsi" viewBox="0 0 300 300"><path fill="#1d1d1d" d="M120 48h60l7 20h8v15l-10 10v150l-22 25h-33l-22-25V93l-10-10V68h8z"/><rect x="110" y="105" width="80" height="110" rx="10" fill="#1764a5"/><circle cx="150" cy="145" r="25" fill="#fff"/><path fill="#e72d35" d="M126 146q24-17 48 0v12h-48z"/><text x="150" y="190" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">Pepsi</text></symbol>
+        <symbol id="milo" viewBox="0 0 300 300"><path fill="#e9e1d5" d="M70 58h160l-12 190H82z"/><path fill="#148a3a" d="M70 58h160v45H70z"/><circle cx="150" cy="158" r="60" fill="#f2d33c"/><text x="150" y="169" text-anchor="middle" font-size="35" font-weight="900" fill="#16863a">MILO</text><text x="150" y="202" text-anchor="middle" font-size="14">400g</text></symbol>
+        <symbol id="dettol" viewBox="0 0 300 300"><rect x="62" y="60" width="176" height="180" rx="20" fill="#fff"/><rect x="62" y="60" width="176" height="45" rx="20" fill="#158b43"/><circle cx="150" cy="155" r="45" fill="#16964a"/><path fill="#fff" d="M150 120l10 25 27 2-21 17 7 27-23-14-23 14 7-27-21-17 27-2z"/><text x="150" y="220" text-anchor="middle" font-size="21" font-weight="800" fill="#158b43">DETTOL</text></symbol>
+        <symbol id="ariel" viewBox="0 0 300 300"><path fill="#fff" d="M70 45h160l-15 215H85z"/><path fill="#0b8c40" d="M70 45h160l-4 50H74z"/><path fill="#ffd61b" d="M110 130l40-35 40 35-40 35z"/><text x="150" y="190" text-anchor="middle" font-size="34" font-weight="900" fill="#168b3f">ARIEL</text><text x="150" y="216" text-anchor="middle" font-size="14">AUTOMATIC • 1kg</text></symbol>
+        <symbol id="pepsodent" viewBox="0 0 300 300"><rect x="42" y="92" width="216" height="105" rx="20" fill="#fff" stroke="#d8d8d8" stroke-width="4"/><path fill="#0a73b7" d="M48 100h204v36H48z"/><text x="150" y="128" text-anchor="middle" font-size="25" font-weight="900" fill="#fff">Pepsodent</text><text x="150" y="165" text-anchor="middle" font-size="17">Fresh & Clean</text></symbol>
+        <symbol id="nescafe" viewBox="0 0 300 300"><path fill="#2c1d16" d="M85 55h130l18 190H67z"/><path fill="#c83b22" d="M85 55h130v55H85z"/><text x="150" y="95" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">NESCAFÉ</text><text x="150" y="165" text-anchor="middle" font-size="26" font-weight="900" fill="#f4d08b">Classic</text><text x="150" y="192" text-anchor="middle" font-size="15" fill="#fff">100g</text></symbol>
+        <symbol id="tissue" viewBox="0 0 300 300"><rect x="55" y="70" width="190" height="160" rx="18" fill="#fff" stroke="#ddd" stroke-width="5"/><path fill="#58a65b" d="M55 70h190v52H55z"/><text x="150" y="105" text-anchor="middle" font-size="25" font-weight="800" fill="#fff">Eva</text><text x="150" y="158" text-anchor="middle" font-size="23" font-weight="700">TISSUE</text><text x="150" y="188" text-anchor="middle" font-size="16">10 Rolls</text></symbol>
+        <symbol id="omo" viewBox="0 0 300 300"><path fill="#fff" d="M68 48h164l-15 215H83z"/><path fill="#e82b2f" d="M68 48h164v48H68z"/><text x="150" y="82" text-anchor="middle" font-size="29" font-weight="900" fill="#fff">OMO</text><path fill="#2a8f45" d="M92 150q58-55 116 0-58 50-116 0z"/><text x="150" y="210" text-anchor="middle" font-size="16">DETERGENT • 1kg</text></symbol>
+        <symbol id="peak" viewBox="0 0 300 300"><path fill="#e6e2d5" d="M68 65h164v155H68z"/><path fill="#1680b7" d="M68 65h164v48H68z"/><circle cx="150" cy="162" r="55" fill="#fff"/><text x="150" y="174" text-anchor="middle" font-size="31" font-weight="900" fill="#1680b7">Peak</text><text x="150" y="204" text-anchor="middle" font-size="14">MILK • 400g</text></symbol>
+        <symbol id="dano" viewBox="0 0 300 300"><path fill="#fff" d="M65 55h170l-12 205H77z"/><path fill="#d72825" d="M65 55h170v48H65z"/><text x="150" y="88" text-anchor="middle" font-size="28" font-weight="900" fill="#fff">DANO</text><path fill="#178b4b" d="M95 155q55-45 110 0-55 48-110 0z"/><text x="150" y="210" text-anchor="middle" font-size="15">FULL CREAM MILK • 400g</text></symbol>
+    </svg>
+
     <section id="products" class="products">
         <h2>Our Products</h2>
-        <p class="section-intro">Find everyday essentials and quality goods at Dorina's.</p>
+        <p class="section-intro">Shop groceries, drinks, household essentials and more.</p>
         <div class="product-container">
-            <div class="product-card"><div class="product-icon">🍚</div><h3>Rice</h3><p>Quality rice for your everyday meals.</p><strong>₦25,000</strong><button onclick="addToCart('Rice', 25000)">Add to Cart</button></div>
-            <div class="product-card"><div class="product-icon">🍝</div><h3>Spaghetti</h3><p>Delicious pasta for the whole family.</p><strong>₦1,500</strong><button onclick="addToCart('Spaghetti', 1500)">Add to Cart</button></div>
-            <div class="product-card"><div class="product-icon">🍜</div><h3>Noodles</h3><p>Quick and tasty noodles for every home.</p><strong>₦1,200</strong><button onclick="addToCart('Noodles', 1200)">Add to Cart</button></div>
-            <div class="product-card"><div class="product-icon">🥤</div><h3>Drinks</h3><p>A variety of refreshing beverages.</p><strong>₦1,000</strong><button onclick="addToCart('Drinks', 1000)">Add to Cart</button></div>
-            <div class="product-card"><div class="product-icon">🧼</div><h3>Soap</h3><p>Quality soap and personal care essentials.</p><strong>₦1,500</strong><button onclick="addToCart('Soap', 1500)">Add to Cart</button></div>
-            <div class="product-card"><div class="product-icon">🧻</div><h3>Household Items</h3><p>Useful products for your everyday needs.</p><strong>₦2,000</strong><button onclick="addToCart('Household Items', 2000)">Add to Cart</button></div>
+            <article class="product-card"><svg class="product-image"><use href="#rice"></use></svg><h3>Golden Penny Rice (10kg)</h3><p>Quality rice for everyday meals.</p><strong>₦15,500</strong><button onclick="addToCart('Golden Penny Rice (10kg)',15500)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#spaghetti"></use></svg><h3>Golden Penny Spaghetti (500g)</h3><p>Delicious pasta for the whole family.</p><strong>₦1,200</strong><button onclick="addToCart('Golden Penny Spaghetti (500g)',1200)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#noodles"></use></svg><h3>Indomie Noodles (70g)</h3><p>Quick and tasty chicken-flavour noodles.</p><strong>₦250</strong><button onclick="addToCart('Indomie Noodles (70g)',250)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#oil"></use></svg><h3>Grand Vegetable Oil (1L)</h3><p>Vegetable oil for your cooking needs.</p><strong>₦2,800</strong><button onclick="addToCart('Grand Vegetable Oil (1L)',2800)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#coke"></use></svg><h3>Coca-Cola (50cl)</h3><p>A refreshing soft drink for any occasion.</p><strong>₦600</strong><button onclick="addToCart('Coca-Cola (50cl)',600)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#pepsi"></use></svg><h3>Pepsi (50cl)</h3><p>Refreshing cola drink.</p><strong>₦600</strong><button onclick="addToCart('Pepsi (50cl)',600)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#milo"></use></svg><h3>Milo (400g)</h3><p>Chocolate malt beverage for the family.</p><strong>₦2,500</strong><button onclick="addToCart('Milo (400g)',2500)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#dettol"></use></svg><h3>Dettol Soap (150g)</h3><p>Personal-care soap for everyday use.</p><strong>₦800</strong><button onclick="addToCart('Dettol Soap (150g)',800)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#ariel"></use></svg><h3>Ariel Detergent (1kg)</h3><p>Quality detergent for laundry.</p><strong>₦2,300</strong><button onclick="addToCart('Ariel Detergent (1kg)',2300)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#pepsodent"></use></svg><h3>Pepsodent (50cl)</h3><p>Fresh and clean everyday oral care.</p><strong>₦850</strong><button onclick="addToCart('Pepsodent (50cl)',850)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#nescafe"></use></svg><h3>Nescafé (100g)</h3><p>Classic coffee for your daily routine.</p><strong>₦2,800</strong><button onclick="addToCart('Nescafé (100g)',2800)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#tissue"></use></svg><h3>Eva Tissue (10 Rolls)</h3><p>Everyday household tissue.</p><strong>₦2,000</strong><button onclick="addToCart('Eva Tissue (10 Rolls)',2000)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#omo"></use></svg><h3>Omo Detergent (1kg)</h3><p>Effective laundry detergent.</p><strong>₦2,300</strong><button onclick="addToCart('Omo Detergent (1kg)',2300)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#peak"></use></svg><h3>Peak Milk (400g)</h3><p>Milk for drinks, breakfast and baking.</p><strong>₦1,800</strong><button onclick="addToCart('Peak Milk (400g)',1800)">🛒 Add to Cart</button></article>
+            <article class="product-card"><svg class="product-image"><use href="#dano"></use></svg><h3>Dano Full Cream Milk (400g)</h3><p>Full cream milk powder for the family.</p><strong>₦2,700</strong><button onclick="addToCart('Dano Full Cream Milk (400g)',2700)">🛒 Add to Cart</button></article>
         </div>
     </section>
 
