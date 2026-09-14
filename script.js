@@ -8,7 +8,7 @@ function shopNow() {
 // Contact Us button
 function contactUs() {
     const phoneNumber = "2348148157968";
-    window.open(`https://wa.me/${phoneNumber}`, "_blank");
+    window.open(`https://wa.me/${+2348148157968}`, "_blank");
 }
 
 // Welcome message when the page loads
