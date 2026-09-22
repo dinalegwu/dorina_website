@@ -166,6 +166,8 @@ function renderProducts() {
     const container = document.getElementById("product-container");
     const emptyState = document.getElementById("empty-products");
     const label = document.getElementById("product-results-label");
+    const status = document.getElementById("product-status");
+    const title = document.getElementById("products-title");
     const viewAll = document.getElementById("view-all");
     if (!container || !emptyState) return;
 
@@ -174,12 +176,18 @@ function renderProducts() {
 
     if (isDefaultView) {
         products = PRODUCTS.filter(product => featuredProductIds.includes(product.id));
+        title.textContent = "Featured products";
         label.textContent = "A few customer favourites to get you started.";
+        if (status) status.textContent = "";
+        viewAll.textContent = "View All Products";
         viewAll.hidden = false;
     } else {
         const categoryName = activeCategory === "all" ? "All products" : getCategoryName(activeCategory);
         const searchNote = searchTerm ? ' matching "' + searchTerm + '"' : "";
+        title.textContent = searchTerm ? "Search results" : (activeCategory === "all" ? "All products" : categoryName);
         label.textContent = products.length + " product" + (products.length === 1 ? "" : "s") + " in " + categoryName + searchNote + ".";
+        if (status) status.textContent = products.length ? "Showing " + products.length + " available product" + (products.length === 1 ? "" : "s") + "." : "";
+        viewAll.textContent = activeCategory === "all" && !searchTerm ? "Back to Featured" : "View All Products";
         viewAll.hidden = false;
     }
 
@@ -212,6 +220,15 @@ function createProductCard(product) {
     });
     media.appendChild(image);
 
+    const cartQuantity = cart.find(item => item.name === product.name)?.quantity || 0;
+    if (cartQuantity > 0) {
+        card.classList.add("in-cart");
+        const badge = document.createElement("span");
+        badge.className = "product-cart-badge";
+        badge.textContent = cartQuantity + " in cart";
+        media.appendChild(badge);
+    }
+
     const content = document.createElement("div");
     content.className = "product-content";
 
@@ -234,11 +251,16 @@ function createProductCard(product) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "add-button";
-    button.textContent = "Add to Cart";
+    button.textContent = cartQuantity > 0 ? "Add Another" : "Add to Cart";
     button.addEventListener("click", () => {
         addToCart(product.id);
         button.textContent = "Added ✓";
-        setTimeout(() => { button.textContent = "Add to Cart"; }, 900);
+        button.classList.add("added");
+        setTimeout(() => {
+            const quantity = cart.find(item => item.name === product.name)?.quantity || 0;
+            button.textContent = quantity > 0 ? "Add Another" : "Add to Cart";
+            button.classList.remove("added");
+        }, 900);
     });
 
     footer.append(price, button);
