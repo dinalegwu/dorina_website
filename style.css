@@ -453,6 +453,16 @@ footer { background: #222; color: white; text-align: center; padding: 22px; font
 }
 [hidden] { display: none !important; }
 
+/* Keep below-the-fold sections out of the initial rendering workload. */
+.categories-section,
+.products,
+.cart-section,
+.about,
+.contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 700px;
+}
+
 @media (max-width: 1050px) {
     .navbar { flex-wrap: wrap; }
     .logo { margin-right: auto; }
