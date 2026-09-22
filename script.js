@@ -231,6 +231,7 @@ function createProductCard(product) {
     image.src = product.image;
     image.alt = product.name;
     image.loading = "lazy";
+    image.decoding = "async";
     image.addEventListener("error", () => {
         image.removeAttribute("src");
         image.classList.add("image-fallback");
