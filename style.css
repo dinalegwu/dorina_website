@@ -168,7 +168,7 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .search-wrap input {
     width: 100%;
     height: 54px;
-    padding: 0 48px;
+    padding: 0 125px 0 48px;
     border: 1px solid #d9d9d9;
     border-radius: 9px;
     color: var(--ink);
@@ -185,9 +185,22 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     font-size: 25px;
     line-height: 1;
 }
+.search-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 38px;
+    padding: 0 15px;
+    border-radius: 7px;
+    background: var(--orange);
+    color: white;
+    font-weight: 700;
+}
+.search-button:hover { background: var(--orange-dark); }
 .clear-search {
     position: absolute;
-    right: 14px;
+    right: 92px;
     top: 50%;
     transform: translateY(-50%);
     width: 30px;
@@ -478,6 +491,9 @@ footer { background: #222; color: white; text-align: center; padding: 22px; font
     .hero h1 { font-size: 40px; }
     .hero p:not(.hero-tag) { font-size: 16px; }
     .quick-shop { margin: -30px 14px 0; padding: 19px; }
+    .search-wrap input { padding-right: 112px; }
+    .search-button { padding: 0 12px; }
+    .clear-search { right: 80px; }
     .categories-section, .products, .cart-section, .about, .contact { padding: 62px 16px; }
     .category-grid, .product-container { grid-template-columns: 1fr; }
     .category-card { min-height: auto; }
