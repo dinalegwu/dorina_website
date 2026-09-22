@@ -1,20 +1,20 @@
 const PRODUCTS = [
-    { id: "golden-penny-rice-10kg", name: "Golden Penny Rice (10kg)", description: "Quality rice for everyday meals.", price: 25500, image: "images/rice.jpg", category: "food-stuffs" },
-    { id: "golden-penny-spaghetti-500g", name: "Golden Penny Spaghetti (500g)", description: "Delicious pasta for the whole family.", price: 1200, image: "images/spaghetti.jpg", category: "food-stuffs" },
-    { id: "indomie-noodles-70g", name: "Indomie Noodles (70g)", description: "Quick and tasty chicken-flavour noodles.", price: 250, image: "images/indomie.jpg", category: "food-stuffs" },
-    { id: "grand-vegetable-oil-1l", name: "Grand Vegetable Oil (1L)", description: "Vegetable oil for your cooking needs.", price: 4000, image: "images/vegetable-oil.jpg", category: "food-stuffs" },
-    { id: "coca-cola-50cl", name: "Coca-Cola (50cl)", description: "A refreshing soft drink for any occasion.", price: 500, image: "images/coca-cola.jpg", category: "soft-drinks" },
-    { id: "pepsi-50cl", name: "Pepsi (50cl)", description: "Refreshing cola drink.", price: 500, image: "images/pepsi.jpg", category: "soft-drinks" },
-    { id: "milo-400g", name: "Milo (400g)", description: "Chocolate malt beverage for the family.", price: 2500, image: "images/milo.jpg", category: "beverages" },
-    { id: "dettol-soap-150g", name: "Dettol Soap (150g)", description: "Personal-care soap for everyday use.", price: 800, image: "images/dettol-soap.jpg", category: "cosmetics-personal-care" },
-    { id: "ariel-detergent-1kg", name: "Ariel Detergent (1kg)", description: "Quality detergent for laundry.", price: 2300, image: "images/ariel.jpg", category: "household-cleaning" },
-    { id: "pepsodent-50cl", name: "Pepsodent (50cl)", description: "Fresh and clean everyday oral-care essential.", price: 850, image: "images/pepsodent.jpg", category: "cosmetics-personal-care" },
-    { id: "nescafe-100g", name: "Nescafé (100g)", description: "Classic coffee for your everyday moments.", price: 2800, image: "images/nescafe.jpg", category: "beverages" },
-    { id: "familia-tissue-10-rolls", name: "Familia Tissue (10 Rolls)", description: "Soft household tissue for everyday use.", price: 2000, image: "images/familia.jpg", category: "sanitary-wares" },
-    { id: "cosmetics", name: "Cosmetics", description: "Personal-care cosmetics for everyday use.", price: 2300, image: "images/cosmetics.jpg", category: "cosmetics-personal-care" },
-    { id: "peak-milk-400g", name: "Peak Milk (400g)", description: "Creamy milk for drinks and meals.", price: 1800, image: "images/peak-milk.jpg", category: "milk-dairy" },
-    { id: "dano-milk-powder-400g", name: "Dano Milk Powder (400g)", description: "Milk powder for the whole family.", price: 2700, image: "images/dano.jpg", category: "milk-dairy" },
-    { id: "cabin-biscuits", name: "Cabin Biscuits", description: "A convenient snack for everyday moments.", price: 2700, image: "images/biscuit.jpg", category: "biscuits-snacks" }
+    { id: "golden-penny-rice-10kg", name: "Golden Penny Rice (10kg)", description: "Quality rice for everyday meals.", price: 25500, image: "images/rice.png", category: "food-stuffs" },
+    { id: "golden-penny-spaghetti-500g", name: "Golden Penny Spaghetti (500g)", description: "Delicious pasta for the whole family.", price: 1200, image: "images/spaghetti.png", category: "food-stuffs" },
+    { id: "indomie-noodles-70g", name: "Indomie Noodles (70g)", description: "Quick and tasty chicken-flavour noodles.", price: 250, image: "images/indomie.png", category: "food-stuffs" },
+    { id: "grand-vegetable-oil-1l", name: "Grand Vegetable Oil (1L)", description: "Vegetable oil for your cooking needs.", price: 4000, image: "images/vegetable-oil.png", category: "food-stuffs" },
+    { id: "coca-cola-50cl", name: "Coca-Cola (50cl)", description: "A refreshing soft drink for any occasion.", price: 500, image: "images/coca-cola.png", category: "soft-drinks" },
+    { id: "pepsi-50cl", name: "Pepsi (50cl)", description: "Refreshing cola drink.", price: 500, image: "images/pepsi.png", category: "soft-drinks" },
+    { id: "milo-400g", name: "Milo (400g)", description: "Chocolate malt beverage for the family.", price: 2500, image: "images/milo.png", category: "beverages" },
+    { id: "dettol-soap-150g", name: "Dettol Soap (150g)", description: "Personal-care soap for everyday use.", price: 800, image: "images/dettol-soap.png", category: "cosmetics-personal-care" },
+    { id: "ariel-detergent-1kg", name: "Ariel Detergent (1kg)", description: "Quality detergent for laundry.", price: 2300, image: "images/ariel.png", category: "household-cleaning" },
+    { id: "pepsodent-50cl", name: "Pepsodent (50cl)", description: "Fresh and clean everyday oral-care essential.", price: 850, image: "images/pepsodent.png", category: "cosmetics-personal-care" },
+    { id: "nescafe-100g", name: "Nescafé (100g)", description: "Classic coffee for your everyday moments.", price: 2800, image: "images/nescafe.png", category: "beverages" },
+    { id: "familia-tissue-10-rolls", name: "Familia Tissue (10 Rolls)", description: "Soft household tissue for everyday use.", price: 2000, image: "images/familia.png", category: "sanitary-wares" },
+    { id: "cosmetics", name: "Cosmetics", description: "Personal-care cosmetics for everyday use.", price: 2300, image: "images/cosmetics.png", category: "cosmetics-personal-care" },
+    { id: "peak-milk-400g", name: "Peak Milk (400g)", description: "Creamy milk for drinks and meals.", price: 1800, image: "images/peak-milk.png", category: "milk-dairy" },
+    { id: "dano-milk-powder-400g", name: "Dano Milk Powder (400g)", description: "Milk powder for the whole family.", price: 2700, image: "images/dano.png", category: "milk-dairy" },
+    { id: "cabin-biscuits", name: "Cabin Biscuits", description: "A convenient snack for everyday moments.", price: 2700, image: "images/biscuit.png", category: "biscuits-snacks" }
 ];
 
 const CATEGORIES = [
