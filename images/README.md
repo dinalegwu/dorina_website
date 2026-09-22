@@ -9,17 +9,20 @@ Put the product photos in this folder using these exact filenames:
 - `coca-cola.jpg`
 - `pepsi.jpg`
 - `milo.jpg`
-- `dettol.jpg`
+- `dettol-soap.jpg`
 - `ariel.jpg`
 - `pepsodent.jpg`
 - `nescafe.jpg`
-- `eva-tissue.jpg`
-- `omo.jpg`
+- `familia.jpg`
+- `cosmetics.jpg`
 - `peak-milk.jpg`
 - `dano.jpg`
+- `biscuit.jpg`
 
-The website already points to these paths, for example:
+The website uses these local paths:
 
 `images/rice.jpg`
 
-Download or save your product photos into this `images` folder and use the exact filenames above. The website will automatically display them in the product cards.
+Download or save each product photo into this `images` folder and use the exact filenames above. The website will display them automatically in the product cards and product-details view.
+
+**Image checklist before launch:** make sure all 16 image files are uploaded and use the exact lowercase filenames above.
