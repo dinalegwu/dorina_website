@@ -11,14 +11,21 @@
     <header class="site-header">
         <nav class="navbar" aria-label="Main navigation">
             <a class="logo" href="#home" aria-label="Dorina's home">Dorina's</a>
-            <ul class="nav-links">
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#categories">Categories</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="cart-button" type="button" id="cart-button">🛒 Cart <span class="cart-count" id="cart-count">0</span></button>
+            <div class="nav-actions">
+                <button class="cart-button" type="button" id="cart-button">🛒 Cart <span class="cart-count" id="cart-count">0</span></button>
+                <button class="menu-button" type="button" id="menu-button" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
         </nav>
     </header>
 
