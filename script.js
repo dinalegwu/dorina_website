@@ -206,6 +206,19 @@ function renderProducts() {
 function createProductCard(product) {
     const card = document.createElement("article");
     card.className = "product-card";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", "View details for " + product.name);
+    card.addEventListener("click", event => {
+        if (event.target.closest("button")) return;
+        openProductDetails(product.id);
+    });
+    card.addEventListener("keydown", event => {
+        if ((event.key === "Enter" || event.key === " ") && event.target === card) {
+            event.preventDefault();
+            openProductDetails(product.id);
+        }
+    });
 
     const media = document.createElement("div");
     media.className = "product-media";
@@ -284,4 +297,147 @@ function closeMobileNavigation() {
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Open navigation menu");
     navigation.classList.remove("open");
+}
+
+
+let detailProductId = null;
+let detailQuantity = 1;
+
+function openProductDetails(productId) {
+    const product = PRODUCTS.find(item => item.id === productId);
+    if (!product) return;
+
+    detailProductId = productId;
+    detailQuantity = 1;
+
+    let modal = document.getElementById("product-details-modal");
+    if (!modal) {
+        modal = createProductDetailsModal();
+        document.body.appendChild(modal);
+    }
+
+    renderProductDetails(product);
+    modal.hidden = false;
+    document.body.classList.add("modal-open");
+    modal.querySelector(".product-details-close")?.focus();
+}
+
+function createProductDetailsModal() {
+    const modal = document.createElement("div");
+    modal.id = "product-details-modal";
+    modal.className = "product-details-modal";
+    modal.hidden = true;
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-labelledby", "product-details-title");
+
+    modal.innerHTML = `
+        <div class="product-details-backdrop" data-close-details></div>
+        <div class="product-details-dialog">
+            <button class="product-details-close" type="button" aria-label="Close product details">×</button>
+            <div class="product-details-media">
+                <img id="product-details-image" src="" alt="">
+            </div>
+            <div class="product-details-content">
+                <span id="product-details-category" class="product-category"></span>
+                <h2 id="product-details-title"></h2>
+                <p id="product-details-description" class="product-details-description"></p>
+                <strong id="product-details-price" class="product-details-price"></strong>
+                <div class="product-details-actions">
+                    <div class="detail-quantity-controls" aria-label="Quantity">
+                        <button id="detail-quantity-decrease" type="button" aria-label="Decrease quantity">−</button>
+                        <span id="detail-quantity" aria-live="polite">1</span>
+                        <button id="detail-quantity-increase" type="button" aria-label="Increase quantity">+</button>
+                    </div>
+                    <button id="detail-add-button" class="add-button" type="button">Add to Cart</button>
+                </div>
+                <p id="product-details-cart-status" class="product-details-cart-status" aria-live="polite"></p>
+            </div>
+        </div>
+    `;
+
+    modal.querySelector(".product-details-close").addEventListener("click", closeProductDetails);
+    modal.querySelector("[data-close-details]").addEventListener("click", closeProductDetails);
+    modal.querySelector("#detail-quantity-decrease").addEventListener("click", () => {
+        detailQuantity = Math.max(1, detailQuantity - 1);
+        updateDetailQuantity();
+    });
+    modal.querySelector("#detail-quantity-increase").addEventListener("click", () => {
+        detailQuantity += 1;
+        updateDetailQuantity();
+    });
+    modal.querySelector("#detail-add-button").addEventListener("click", () => {
+        const product = PRODUCTS.find(item => item.id === detailProductId);
+        if (!product) return;
+
+        for (let i = 0; i < detailQuantity; i += 1) addToCart(product.id);
+        const status = modal.querySelector("#product-details-cart-status");
+        status.textContent = detailQuantity + (detailQuantity === 1 ? " item" : " items") + " added to your cart.";
+        modal.querySelector("#detail-add-button").textContent = "Added ✓";
+        setTimeout(() => {
+            if (modal.hidden) return;
+            modal.querySelector("#detail-add-button").textContent = "Add to Cart";
+        }, 900);
+    });
+
+    modal.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            closeProductDetails();
+            return;
+        }
+
+        if (event.key !== "Tab") return;
+        const focusable = [...modal.querySelectorAll("button")].filter(button => !button.disabled);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    });
+
+    return modal;
+}
+
+function renderProductDetails(product) {
+    const modal = document.getElementById("product-details-modal");
+    if (!modal) return;
+
+    const image = modal.querySelector("#product-details-image");
+    image.src = product.image;
+    image.alt = product.name;
+    image.onerror = () => {
+        image.removeAttribute("src");
+        image.classList.add("image-fallback");
+        image.alt = product.name + " image unavailable";
+    };
+
+    modal.querySelector("#product-details-category").textContent = getCategoryName(product.category);
+    modal.querySelector("#product-details-title").textContent = product.name;
+    modal.querySelector("#product-details-description").textContent = product.description;
+    modal.querySelector("#product-details-price").textContent = formatPrice(product.price);
+
+    const existing = cart.find(item => item.name === product.name)?.quantity || 0;
+    modal.querySelector("#product-details-cart-status").textContent = existing
+        ? existing + (existing === 1 ? " item" : " items") + " already in your cart."
+        : "";
+    modal.querySelector("#detail-add-button").textContent = "Add to Cart";
+    updateDetailQuantity();
+}
+
+function updateDetailQuantity() {
+    const quantity = document.getElementById("detail-quantity");
+    if (quantity) quantity.textContent = detailQuantity;
+}
+
+function closeProductDetails() {
+    const modal = document.getElementById("product-details-modal");
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.classList.remove("modal-open");
+    detailProductId = null;
 }
