@@ -1,5 +1,6 @@
 let activeCategory = "all";
 let searchTerm = "";
+let showAllProducts = false;
 const featuredProductIds = [
     "golden-penny-rice-10kg",
     "coca-cola-50cl",
@@ -53,16 +54,26 @@ function setupInteractions() {
     document.getElementById("clear-cart")?.addEventListener("click", clearCart);
 
     const search = document.getElementById("product-search");
-    search?.addEventListener("input", event => {
-        searchTerm = event.target.value.trim().toLowerCase();
+    const searchForm = document.getElementById("search-form");
+
+    searchForm?.addEventListener("submit", event => {
+        event.preventDefault();
+        searchTerm = search?.value.trim().toLowerCase() || "";
+        showAllProducts = true;
         document.getElementById("clear-search").hidden = !searchTerm;
         renderCategories();
         renderProducts();
+        document.getElementById("products")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    search?.addEventListener("input", event => {
+        document.getElementById("clear-search").hidden = !event.target.value.trim();
     });
 
     document.getElementById("clear-search")?.addEventListener("click", () => {
         search.value = "";
         searchTerm = "";
+        showAllProducts = false;
         document.getElementById("clear-search").hidden = true;
         renderProducts();
         search.focus();
@@ -71,6 +82,7 @@ function setupInteractions() {
     document.getElementById("view-all")?.addEventListener("click", () => {
         activeCategory = "all";
         searchTerm = "";
+        showAllProducts = true;
         const search = document.getElementById("product-search");
         if (search) search.value = "";
         document.getElementById("clear-search").hidden = true;
@@ -82,6 +94,7 @@ function setupInteractions() {
     document.getElementById("reset-filters")?.addEventListener("click", () => {
         activeCategory = "all";
         searchTerm = "";
+        showAllProducts = false;
         const search = document.getElementById("product-search");
         if (search) search.value = "";
         document.getElementById("clear-search").hidden = true;
@@ -115,6 +128,7 @@ function renderCategories() {
             const search = document.getElementById("product-search");
             if (search) search.value = "";
             searchTerm = "";
+            showAllProducts = true;
             document.getElementById("clear-search").hidden = true;
             renderCategories();
             renderProducts();
@@ -156,7 +170,7 @@ function renderProducts() {
     if (!container || !emptyState) return;
 
     let products = getFilteredProducts();
-    const isDefaultView = activeCategory === "all" && !searchTerm;
+    const isDefaultView = activeCategory === "all" && !searchTerm && !showAllProducts;
 
     if (isDefaultView) {
         products = PRODUCTS.filter(product => featuredProductIds.includes(product.id));
