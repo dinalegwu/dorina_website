@@ -42,11 +42,16 @@ function loadCart() {
             Number(item.price) >= 0 &&
             Number.isInteger(Number(item.quantity)) &&
             Number(item.quantity) > 0
-        ).map(item => ({
-            name: item.name,
-            price: Number(item.price),
-            quantity: Number(item.quantity)
-        }));
+        ).map(item => {
+            const product = PRODUCTS.find(productItem => productItem.name === item.name);
+            return {
+                id: item.id || (product ? product.id : ""),
+                name: item.name,
+                price: Number(item.price),
+                quantity: Number(item.quantity),
+                image: item.image || (product ? product.image : "")
+            };
+        });
     } catch {
         return [];
     }
@@ -64,7 +69,7 @@ function addToCart(productId) {
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({ name: product.name, price: product.price, quantity: 1 });
+        cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1, image: product.image });
     }
 
     saveCart();
@@ -107,6 +112,9 @@ function updateCart() {
     if (count) count.textContent = totalQuantity.toLocaleString();
     if (totalElement) totalElement.textContent = formatPrice(totalPrice);
 
+    const itemCountElement = document.getElementById("cart-item-count");
+    if (itemCountElement) itemCountElement.textContent = totalQuantity + (totalQuantity === 1 ? " item" : " items");
+
     const orderButton = document.getElementById("order-whatsapp");
     const clearButton = document.getElementById("clear-cart");
     if (orderButton) orderButton.disabled = cart.length === 0;
@@ -116,18 +124,45 @@ function updateCart() {
     itemsContainer.replaceChildren();
 
     if (!cart.length) {
-        const empty = document.createElement("p");
+        const empty = document.createElement("div");
         empty.className = "cart-empty";
-        empty.textContent = "Your cart is empty.";
+        const message = document.createElement("p");
+        message.textContent = "Your cart is empty.";
+        const browse = document.createElement("button");
+        browse.className = "secondary-button cart-browse-button";
+        browse.type = "button";
+        browse.textContent = "Browse Products";
+        browse.addEventListener("click", () => {
+            document.getElementById("products")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        empty.append(message, browse);
         itemsContainer.appendChild(empty);
         return;
     }
 
     cart.forEach((item, index) => {
-        const row = document.createElement("div");
+        const row = document.createElement("article");
         row.className = "cart-item";
 
+        const media = document.createElement("div");
+        media.className = "cart-item-media";
+        if (item.image) {
+            const image = document.createElement("img");
+            image.src = item.image;
+            image.alt = item.name;
+            image.loading = "lazy";
+            image.addEventListener("error", () => {
+                image.removeAttribute("src");
+                image.classList.add("image-fallback");
+                image.alt = item.name + " image unavailable";
+            });
+            media.appendChild(image);
+        } else {
+            media.classList.add("image-fallback");
+        }
+
         const details = document.createElement("div");
+        details.className = "cart-item-details";
         const name = document.createElement("h3");
         name.textContent = item.name;
         const unit = document.createElement("p");
@@ -137,18 +172,24 @@ function updateCart() {
         const controls = document.createElement("div");
         controls.className = "quantity-controls";
         controls.append(
-            createCartButton("−", "Decrease quantity", () => changeQuantity(index, -1))
+            createCartButton("−", "Decrease quantity for " + item.name, () => changeQuantity(index, -1))
         );
         const quantity = document.createElement("span");
         quantity.textContent = item.quantity;
-        quantity.setAttribute("aria-label", "Quantity");
+        quantity.setAttribute("aria-label", item.name + " quantity");
+        quantity.setAttribute("aria-live", "polite");
         controls.appendChild(quantity);
         controls.append(
-            createCartButton("+", "Increase quantity", () => changeQuantity(index, 1))
+            createCartButton("+", "Increase quantity for " + item.name, () => changeQuantity(index, 1))
         );
 
-        const subtotal = document.createElement("strong");
-        subtotal.textContent = formatPrice(item.price * item.quantity);
+        const subtotal = document.createElement("div");
+        subtotal.className = "cart-item-subtotal";
+        const subtotalLabel = document.createElement("span");
+        subtotalLabel.textContent = "Subtotal";
+        const subtotalValue = document.createElement("strong");
+        subtotalValue.textContent = formatPrice(item.price * item.quantity);
+        subtotal.append(subtotalLabel, subtotalValue);
 
         const remove = document.createElement("button");
         remove.className = "remove-button";
@@ -156,7 +197,7 @@ function updateCart() {
         remove.textContent = "Remove";
         remove.addEventListener("click", () => removeFromCart(index));
 
-        row.append(details, controls, subtotal, remove);
+        row.append(media, details, controls, subtotal, remove);
         itemsContainer.appendChild(row);
     });
 }
@@ -176,12 +217,22 @@ function orderOnWhatsApp() {
         return;
     }
 
-    const items = cart.map(item =>
-        item.name + " x" + item.quantity + " = " + formatPrice(item.price * item.quantity)
-    ).join("\n");
+    const items = cart.map((item, index) =>
+        (index + 1) + ". " + item.name + "\n" +
+        "   Qty: " + item.quantity + "\n" +
+        "   Subtotal: " + formatPrice(item.price * item.quantity)
+    ).join("\n\n");
 
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const message = "Hello Dorina's, I would like to place an order:\n\n" + items + "\n\nTotal: " + formatPrice(total);
+    const message =
+        "Hello Dorina's,\n\n" +
+        "I'd like to place the following order:\n\n" +
+        items +
+        "\n\n----------------\n" +
+        "TOTAL: " + formatPrice(total) +
+        "\n----------------\n\n" +
+        "Please confirm availability and delivery details.\n" +
+        "Thank you.";
     window.open("https://wa.me/2348148157968?text=" + encodeURIComponent(message), "_blank", "noopener,noreferrer");
 }
 
