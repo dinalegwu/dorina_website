@@ -106,6 +106,11 @@ function updateCart() {
 
     if (count) count.textContent = totalQuantity.toLocaleString();
     if (totalElement) totalElement.textContent = formatPrice(totalPrice);
+
+    const orderButton = document.getElementById("order-whatsapp");
+    const clearButton = document.getElementById("clear-cart");
+    if (orderButton) orderButton.disabled = cart.length === 0;
+    if (clearButton) clearButton.disabled = cart.length === 0;
     if (!itemsContainer) return;
 
     itemsContainer.replaceChildren();
