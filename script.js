@@ -9,6 +9,7 @@ const featuredProductIds = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
+    initializeTheme();
     renderCategories();
     renderProducts();
     updateCart();
@@ -16,6 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setupInteractions() {
+    const themeToggle = document.getElementById("theme-toggle");
+    themeToggle?.addEventListener("click", toggleTheme);
+
     const menuButton = document.getElementById("menu-button");
     const navigation = document.getElementById("primary-navigation");
 
@@ -440,4 +444,33 @@ function closeProductDetails() {
     modal.hidden = true;
     document.body.classList.remove("modal-open");
     detailProductId = null;
+}
+
+
+function initializeTheme() {
+    const storedTheme = localStorage.getItem("dorinasTheme");
+    const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    applyTheme(storedTheme === "dark" || (!storedTheme && prefersDark) ? "dark" : "light");
+}
+
+function toggleTheme() {
+    const nextTheme = document.body.classList.contains("dark-mode") ? "light" : "dark";
+    applyTheme(nextTheme);
+    localStorage.setItem("dorinasTheme", nextTheme);
+}
+
+function applyTheme(theme) {
+    const isDark = theme === "dark";
+    document.body.classList.toggle("dark-mode", isDark);
+
+    const toggle = document.getElementById("theme-toggle");
+    if (!toggle) return;
+
+    toggle.setAttribute("aria-pressed", String(isDark));
+    toggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+
+    const icon = toggle.querySelector(".theme-icon");
+    const label = toggle.querySelector(".theme-label");
+    if (icon) icon.textContent = isDark ? "☀" : "☾";
+    if (label) label.textContent = isDark ? "Light" : "Dark";
 }
