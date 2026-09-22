@@ -80,9 +80,10 @@ function setupInteractions() {
     });
 
     document.getElementById("view-all")?.addEventListener("click", () => {
+        const showingAll = activeCategory === "all" && !searchTerm && showAllProducts;
         activeCategory = "all";
         searchTerm = "";
-        showAllProducts = true;
+        showAllProducts = !showingAll;
         const search = document.getElementById("product-search");
         if (search) search.value = "";
         document.getElementById("clear-search").hidden = true;
