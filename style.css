@@ -47,12 +47,40 @@ button:focus-visible, a:focus-visible, input:focus-visible {
     letter-spacing: -.8px;
     margin-right: auto;
 }
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .nav-links {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 24px;
 }
+.menu-button {
+    display: none;
+    width: 42px;
+    height: 42px;
+    padding: 9px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid var(--line);
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}
+.menu-button span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .2s ease, opacity .2s ease;
+}
+.menu-button[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-button[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 .nav-links a {
     color: var(--ink);
     text-decoration: none;
@@ -408,11 +436,31 @@ footer { background: #222; color: white; text-align: center; padding: 22px; font
 
 @media (max-width: 1050px) {
     .navbar { flex-wrap: wrap; }
-    .logo { margin-right: 0; }
+    .logo { margin-right: auto; }
     .nav-links { order: 3; width: 100%; justify-content: center; }
     .category-grid, .product-container { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 800px) {
+    .navbar { position: relative; }
+    .menu-button { display: flex; }
+    .nav-links {
+        display: none;
+        order: 3;
+        width: 100%;
+        padding: 8px 0 4px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+        display: block;
+        padding: 12px 10px;
+        border-radius: 7px;
+        font-size: 14px;
+    }
+    .nav-links a:hover { background: var(--soft-orange); }
     .category-grid, .product-container { grid-template-columns: repeat(2, 1fr); }
     .products-heading { align-items: start; }
     .about-inner { grid-template-columns: 1fr; gap: 20px; }
