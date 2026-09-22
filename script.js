@@ -15,6 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function setupInteractions() {
+    const menuButton = document.getElementById("menu-button");
+    const navigation = document.getElementById("primary-navigation");
+
+    menuButton?.addEventListener("click", () => {
+        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", String(!isOpen));
+        menuButton.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+        navigation?.classList.toggle("open", !isOpen);
+    });
+
+    navigation?.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => closeMobileNavigation());
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeMobileNavigation();
+    });
+
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 800) closeMobileNavigation();
+    });
+
     document.getElementById("shop-now")?.addEventListener("click", () => {
         document.getElementById("categories")?.scrollIntoView({ behavior: "smooth" });
     });
@@ -213,4 +235,16 @@ function createProductCard(product) {
 
 function getCategoryName(id) {
     return CATEGORIES.find(category => category.id === id)?.name || "Other";
+}
+
+
+function closeMobileNavigation() {
+    const menuButton = document.getElementById("menu-button");
+    const navigation = document.getElementById("primary-navigation");
+
+    if (!menuButton || !navigation) return;
+
+    menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Open navigation menu");
+    navigation.classList.remove("open");
 }
