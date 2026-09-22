@@ -3,80 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dorina's Provisions & More - quality groceries, drinks, household items and personal care products.">
-    <title>Dorina's - Provisions & More</title>
+    <meta name="description" content="Dorina's Provisions & More — quality groceries, drinks, household essentials and personal care products at affordable prices.">
+    <title>Dorina's — Provisions & More</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">Dorina's</div>
+    <header class="site-header">
+        <nav class="navbar" aria-label="Main navigation">
+            <a class="logo" href="#home" aria-label="Dorina's home">Dorina's</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <button class="cart-button" onclick="showCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+            <button class="cart-button" type="button" id="cart-button">🛒 Cart <span class="cart-count" id="cart-count">0</span></button>
         </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <p class="hero-tag">QUALITY • AFFORDABLE • CONVENIENT</p>
-            <h1>Quality Goods, Everyday Essentials</h1>
-            <p>Fresh provisions, drinks, household items and more — all in one place.</p>
-            <button onclick="shopNow()">Shop Now →</button>
-        </div>
-    </section>
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <p class="hero-tag">QUALITY • AFFORDABLE • CONVENIENT</p>
+                <h1>Quality Goods, Everyday Essentials</h1>
+                <p>Fresh provisions, drinks, household items and more — all in one place.</p>
+                <button class="primary-button" type="button" id="shop-now">Shop Now <span aria-hidden="true">→</span></button>
+            </div>
+        </section>
 
-    <section id="about" class="about">
-        <h2>About Dorina's</h2>
-        <p>At Dorina's, we provide different varieties of quality goods and everyday provisions at affordable prices.</p>
-    </section>
+        <section class="quick-shop" aria-labelledby="quick-shop-title">
+            <div class="section-heading compact-heading">
+                <p class="eyebrow">FIND WHAT YOU NEED</p>
+                <h2 id="quick-shop-title">What are you shopping for?</h2>
+            </div>
+            <div class="search-wrap">
+                <label class="sr-only" for="product-search">Search products</label>
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input id="product-search" type="search" placeholder="Search products..." autocomplete="off">
+                <button id="clear-search" class="clear-search" type="button" aria-label="Clear search" hidden>×</button>
+            </div>
+        </section>
 
-    <section id="products" class="products">
-        <h2>Our Products</h2>
-        <p class="section-intro">Shop groceries, drinks, household essentials and more.</p>
-        <div class="product-container">
-            <article class="product-card"><img class="product-image" src="images/rice.png" alt="Golden Penny Rice" onerror="this.src='images/placeholder.jpg'"><h3>Golden Penny Rice (10kg)</h3><p>Quality rice for everyday meals.</p><strong>₦25,500</strong><button onclick="addToCart('Golden Penny Rice (10kg)',15500)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/spaghetti.png" alt="Golden Penny Spaghetti" onerror="this.src='images/placeholder.jpg'"><h3>Golden Penny Spaghetti (500g)</h3><p>Delicious pasta for the whole family.</p><strong>₦1,200</strong><button onclick="addToCart('Golden Penny Spaghetti (500g)',1200)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/indomie.png" alt="Indomie Noodles" onerror="this.src='images/placeholder.jpg'"><h3>Indomie Noodles (70g)</h3><p>Quick and tasty chicken-flavour noodles.</p><strong>₦250</strong><button onclick="addToCart('Indomie Noodles (70g)',250)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/vegetable-oil.png" alt="Grand Vegetable Oil" onerror="this.src='images/placeholder.jpg'"><h3>Grand Vegetable Oil (1L)</h3><p>Vegetable oil for your cooking needs.</p><strong>₦4,000</strong><button onclick="addToCart('Grand Vegetable Oil (1L)',2800)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/coca-cola.png" alt="Coca-Cola" onerror="this.src='images/placeholder.jpg'"><h3>Coca-Cola (50cl)</h3><p>A refreshing soft drink for any occasion.</p><strong>₦500</strong><button onclick="addToCart('Coca-Cola (50cl)',600)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/pepsi.png" alt="Pepsi" onerror="this.src='images/placeholder.jpg'"><h3>Pepsi (50cl)</h3><p>Refreshing cola drink.</p><strong>₦500</strong><button onclick="addToCart('Pepsi (50cl)',600)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/milo.png" alt="Milo" onerror="this.src='images/placeholder.jpg'"><h3>Milo (400g)</h3><p>Chocolate malt beverage for the family.</p><strong>₦2,500</strong><button onclick="addToCart('Milo (400g)',2500)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/dettol-soap.png" alt="Dettol Soa p" onerror="this.src='images/placeholder.jpg'"><h3>Dettol Soap (150g)</h3><p>Personal-care soap for everyday use.</p><strong>₦800</strong><button onclick="addToCart('Dettol Soap (150g)',800)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/ariel.png" alt="Ariel Detergent" onerror="this.src='images/placeholder.jpg'"><h3>Ariel Detergent (1kg)</h3><p>Quality detergent for laundry.</p><strong>₦2,300</strong><button onclick="addToCart('Ariel Detergent (1kg)',2300)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/pepsodent.png" alt="Pepsodent" onerror="this.src='images/placeholder.jpg'"><h3>Pepsodent (50cl)</h3><p>Fresh and clean everyday oral-care essential.</p><strong>₦850</strong><button onclick="addToCart('Pepsodent (50cl)',850)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/nescafe.png" alt="Nescafe" onerror="this.src='images/placeholder.jpg'"><h3>Nescafé (100g)</h3><p>Classic coffee for your everyday moments.</p><strong>₦2,800</strong><button onclick="addToCart('Nescafé (100g)',2800)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/familia.png" alt="Eva Tissue" onerror="this.src='images/placeholder.jpg'"><h3>Familia Tissue (10 Rolls)</h3><p>Soft household tissue for everyday use.</p><strong>₦2,000</strong><button onclick="addToCart('Eva Tissue (10 Rolls)',2000)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/cosmetics.png" alt="Cosmetics" onerror="this.src='images/placeholder.jpg'"><h3>Cosmetics</h3><p>Premium Cosmetics for Your Everyday Use.</p><strong>₦2,300</strong><button onclick="addToCart('Omo Detergent (1kg)',2300)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/peak-milk.png" alt="Peak Milk" onerror="this.src='images/placeholder.jpg'"><h3>Peak Milk (400g)</h3><p>Creamy milk for drinks and meals.</p><strong>₦1,800</strong><button onclick="addToCart('Peak Milk (400g)',1800)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/dano-milk powder.png" alt="Dano Milk Powder" onerror="this.src='images/placeholder.jpg'"><h3>Dano Milk Powder (400g)</h3><p>Milk powder for the whole family.</p><strong>₦2,700</strong><button onclick="addToCart('Dano Milk Powder (400g)',2700)">🛒 Add to Cart</button></article>
-            <article class="product-card"><img class="product-image" src="images/biscuit.png" alt="cabin biscuits" onerror="this.src='images/placeholder.jpg'"><h3>Cabin biscuits</h3><p>Cabin biscuit.</p><strong>₦2,700</strong><button onclick="addToCart('Dano Milk Powder (400g)',4000)">🛒 Add to Cart</button></article>
-        </div>
-    </section>
+        <section id="categories" class="categories-section" aria-labelledby="categories-title">
+            <div class="section-heading">
+                <p class="eyebrow">SHOP BY CATEGORY</p>
+                <h2 id="categories-title">Browse the store</h2>
+                <p>Choose a category to see the products you need.</p>
+            </div>
+            <div id="category-grid" class="category-grid"></div>
+        </section>
 
-    <section id="cart" class="cart-section">
-        <h2>Your Shopping Cart</h2>
-        <div id="cart-items"><p>Your cart is empty.</p></div>
-        <div class="cart-summary">
-            <h3>Total: <span id="cart-total">₦0</span></h3>
-            <button class="order-button" onclick="orderOnWhatsApp()">Order on WhatsApp</button>
-            <button class="clear-button" onclick="clearCart()">Clear Cart</button>
-        </div>
-    </section>
+        <section id="products" class="products" aria-labelledby="products-title">
+            <div class="section-heading products-heading">
+                <div>
+                    <p class="eyebrow">OUR SELECTION</p>
+                    <h2 id="products-title">Featured products</h2>
+                    <p id="product-results-label">A few customer favourites to get you started.</p>
+                </div>
+                <button id="view-all" class="secondary-button" type="button">View All Products</button>
+            </div>
+            <div id="product-container" class="product-container" aria-live="polite"></div>
+            <div id="empty-products" class="empty-state" hidden>
+                <div class="empty-icon" aria-hidden="true">⌕</div>
+                <h3>No products found</h3>
+                <p>Try a different search term or choose another category.</p>
+                <button id="reset-filters" class="secondary-button" type="button">Show all products</button>
+            </div>
+        </section>
 
-    <section id="contact" class="contact">
-        <h2>Contact Us</h2>
-        <p>Ready to order? Contact Dorina's today.</p>
-        <p>Call us on: <strong>08148157968</strong></p>
-        <button onclick="contactUs()">Contact Us on WhatsApp</button>
-    </section>
+        <section id="about" class="about">
+            <div class="about-inner">
+                <div>
+                    <p class="eyebrow">ABOUT DORINA'S</p>
+                    <h2>Everyday essentials, made easier to find.</h2>
+                </div>
+                <p>At Dorina's, we provide different varieties of quality goods and everyday provisions at affordable prices — helping you get the essentials you need without the stress.</p>
+            </div>
+        </section>
 
-    <footer><p>&copy; 2026 Dorina's. All Rights Reserved.</p></footer>
-    <script src="script.js"></script>
+        <section id="cart" class="cart-section" aria-labelledby="cart-title">
+            <div class="section-heading">
+                <p class="eyebrow">YOUR ORDER</p>
+                <h2 id="cart-title">Shopping Cart</h2>
+                <p>Review your items before ordering on WhatsApp.</p>
+            </div>
+            <div id="cart-items"><p class="cart-empty">Your cart is empty.</p></div>
+            <div class="cart-summary">
+                <div>
+                    <span>Total</span>
+                    <strong id="cart-total">₦0</strong>
+                </div>
+                <div class="cart-actions">
+                    <button class="order-button" id="order-whatsapp" type="button">Order on WhatsApp</button>
+                    <button class="clear-button" id="clear-cart" type="button">Clear Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <p class="eyebrow">NEED HELP?</p>
+            <h2>Ready to order?</h2>
+            <p>Contact Dorina's and we'll help you get what you need.</p>
+            <p class="phone">08148157968</p>
+            <button class="primary-button" id="contact-whatsapp" type="button">Contact Us on WhatsApp</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dorina's. All Rights Reserved.</p>
+    </footer>
+
     <script src="products.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
