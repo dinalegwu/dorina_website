@@ -34,7 +34,6 @@ function setupInteractions() {
     search?.addEventListener("input", event => {
         searchTerm = event.target.value.trim().toLowerCase();
         document.getElementById("clear-search").hidden = !searchTerm;
-        activeCategory = "all";
         renderCategories();
         renderProducts();
     });
@@ -78,17 +77,22 @@ function renderCategories() {
     CATEGORIES.forEach(category => {
         const button = document.createElement("button");
         button.type = "button";
-        button.className = "category-card" + (category.id === activeCategory && !searchTerm ? " active" : "");
-        button.innerHTML = '<span class="category-icon" aria-hidden="true">' + category.icon + '</span><span class="category-name"></span><span class="category-description"></span>';
+        button.className = "category-card" + (category.id === activeCategory ? " active" : "");
+        button.setAttribute("aria-pressed", String(category.id === activeCategory));
+        button.innerHTML = '<span class="category-top"><span class="category-icon" aria-hidden="true">' + category.icon + '</span><span class="category-count"></span></span><span class="category-name"></span><span class="category-description"></span>';
 
+        const categoryProducts = category.id === "all"
+            ? PRODUCTS
+            : PRODUCTS.filter(product => product.category === category.id);
+        button.querySelector(".category-count").textContent = categoryProducts.length + (categoryProducts.length === 1 ? " item" : " items");
         button.querySelector(".category-name").textContent = category.name;
         button.querySelector(".category-description").textContent = category.description;
 
         button.addEventListener("click", () => {
             activeCategory = category.id;
-            searchTerm = "";
             const search = document.getElementById("product-search");
             if (search) search.value = "";
+            searchTerm = "";
             document.getElementById("clear-search").hidden = true;
             renderCategories();
             renderProducts();
@@ -107,11 +111,16 @@ function getFilteredProducts() {
     }
 
     if (searchTerm) {
-        products = products.filter(product =>
-            (product.name + " " + product.description + " " + getCategoryName(product.category))
-                .toLowerCase()
-                .includes(searchTerm)
-        );
+        const terms = searchTerm.split(/\s+/).filter(Boolean);
+        products = products.filter(product => {
+            const haystack = (
+                product.name + " " +
+                product.description + " " +
+                getCategoryName(product.category)
+            ).toLowerCase();
+
+            return terms.every(term => haystack.includes(term));
+        });
     }
 
     return products;
@@ -132,8 +141,10 @@ function renderProducts() {
         label.textContent = "A few customer favourites to get you started.";
         viewAll.hidden = false;
     } else {
-        label.textContent = products.length + " product" + (products.length === 1 ? "" : "s") + " found.";
-        viewAll.hidden = true;
+        const categoryName = activeCategory === "all" ? "All products" : getCategoryName(activeCategory);
+        const searchNote = searchTerm ? ' matching "' + searchTerm + '"' : "";
+        label.textContent = products.length + " product" + (products.length === 1 ? "" : "s") + " in " + categoryName + searchNote + ".";
+        viewAll.hidden = false;
     }
 
     container.replaceChildren();
